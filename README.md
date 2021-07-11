@@ -28,25 +28,17 @@ The basic information of our 22 industrial subjects is shown in the paper. Note 
 
 ## Input data
 
-### Open-source
+The input data of all subjects are shown [here](Input_Data/original_input/opensource/). For each subject, the corresponding directory contains four files. "testList" contains the names of all test cases, and their IDs start from 1. "stateMatrix.txt" contains the coverage table: each row represents one test case while each column represents one statement, and "1" means covered while "0" means uncovered. "state-map.txt" contains another form of the coverage table: each row represents one test case and it shows all statement IDs covered by this test case. "mutantKillMatrix" contains the kill information, where each row represents a test case and each column represents a mutant, and "1" means the corresponding test case kills the corresponding mutant while "0" means the opposite. P.S. Due to the 100M limit of file size on GitHub, we delete commons-math/mutantKillMatrix, commons-math/stateMatrix.txt, and camel-core/stateMatrix.txt.
 
-The input data of our 55 open-source subjects are shown [here](Input_Data/opensource/). For each subject, the corresponding directory contains four files. "testList" contains the names of all test cases, and their IDs start from 1. "stateMatrix.txt" contains the coverage table: each row represents one test case while each column represents one statement, and "1" means covered while "0" means uncovered. "state-map.txt" contains another form of the coverage table: each row represents one test case and it shows all statement IDs covered by this test case. "mutantKillMatrix" contains the kill information, where each row represents a test case and each column represents a mutant, and "1" means the corresponding test case kills the corresponding mutant while "0" means the opposite. P.S. Due to the 100M limit of file size on GitHub, we delete commons-math/mutantKillMatrix, commons-math/stateMatrix.txt, and camel-core/stateMatrix.txt.
-
-The other form of input (adjacency list) can be obtained from "mutantKillMatrix" (adjacency matrix). We do not put them here because they are redundant.
-
-### Industry
-
-The input data of our 22 industrial subjects is hidden because of the company's confidentiality.
-
-
+Besides, we put the adjacency lists of each subject [here](Input_Data/input_adjlist/). In each subject with this directory, ```<name>-line.txt``` stores the adjacency lists, and ```fault_matrix_key_tc,pickle``` stores the kill information. We make this additional directory to convenient reuse the code of *FAST*.
 
 ## Code
 
-The code of AGA is present [here](Code/AGA.py) (based on both adjacency matrix and adjacency list).
+The code of AGA is present [here](Code/AGA.py). The reproducing command is ```python AGA.py <category> <name>```, where ```<category>``` can be ```opensource``` or ```industry``` and ```name``` can be any one in the ```Input_Data/original_input``` directory. Note that due to the confidential policy, we do not provide the ```testList``` file of industrial subjects. Therefore, to reproducing the results, readers could manually add a fake ```testList``` that have the same number of rows as ```mutantKillMatrix```. The running results of AGA will be in the ```Results/agaresults``` directory. Slightly different from the paper, this code will produce the running results of all iteration numbers, that is ```SequenceGAMethod_<number>.txt``` shows the results on iteration number ```<number>```, and ```TimeGAMethod_adjacencylist``` presents the preparation time and the running time of  all iteration numbers. Reader could obtain the results of AGA by using 10 as the iteration number.
 
-The code of our implementation of GA (based on adjacency matrix) is present [here](Code/GA.py).
+To calculate the APFD values, readers could run ```python calculate_apfd.py <name>```, where ```<name>``` can be any one in the ```Input_Data/original_input``` directory. The results are shown in the ```apfd_result.csv``` file in each subject in ```Results/agaresults```. The results present the APFD value of each iteration number.
 
-The code of *FAST* is present on this [website](https://github.com/icse18-FAST/FAST). (Note that we also reuse their implementation of GA (based on adjacency list).)
+To improve the reliability of our work, we reuse the code framework of *FAST* to running GA, GA-first, *FAST*, ART-D, and GA-S. The code is present in the ```Code/py``` directory. To run these algorithms, please go to the ```Code``` directory and run ```python py/prioritize.py <name> line <algorithm> <repetitions>```, where ```<name>``` can be any one in the ```Input_Data/input_adjlist``` directory, ```<algorithm>``` can be any one of GA, GA-first, FAST-pw, FAST-one, FAST-log, FAST-sqrt, FAST-all, ART-D, and GA-S, and ```<repetitions>``` can be any positive numbers. The running results will be in ```Results/compareresults```.
 
 
 
