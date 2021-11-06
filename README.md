@@ -40,7 +40,7 @@ To calculate the APFD values, readers could run ```python calculate_apfd.py <nam
 
 To improve the reliability of our work, we reuse the code framework of *FAST* to running GA, GA-first, *FAST*, ART-D, and GA-S. The code is present in the ```Code/py``` directory. To run these algorithms, please go to the ```Code``` directory and run ```python py/prioritize.py <name> line <algorithm> <repetitions>```, where ```<name>``` can be any one in the ```Input_Data/input_adjlist``` directory, ```<algorithm>``` can be any one of GA, GA-first, FAST-pw, FAST-one, FAST-log, FAST-sqrt, FAST-all, ART-D, and GA-S, and ```<repetitions>``` can be any positive numbers. The running results will be in ```Results/compareresults```.
 
-Additionally the complete statistical testing process can be found [here](statisticaltests.R).
+Additionally, the complete statistical testing process can be found [here](statisticaltests.R).
 
 
 
